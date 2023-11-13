@@ -1,0 +1,252 @@
+/* Importación de la fuente Roboto desde Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+
+/* Establece el modelo de caja para todos los elementos */
+* {
+  box-sizing: border-box;
+}
+
+/* body *:hover{
+  background-color: pink;
+} */
+/* Variables de colores */
+:root {
+  --primary-color: #c70039;
+  --secondary-color: grey;
+}
+
+/* Estilos generales para el cuerpo del documento */
+body {
+  background: #222;
+  font-family: 'Roboto', sans-serif;
+  color: #f2f2f2;
+  cursor: url('../img/cursor-arrow.png'), auto;
+  counter-reset: cuenta-section;
+}
+
+/* Estilos de selección para los encabezados h1 */
+h1::selection {
+  color: var(--primary-color);
+}
+
+/* Estilos para las secciones */
+section::before {
+  content: 'Sección ' counter(cuenta-section) " - ";
+  counter-increment: cuenta-section;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+/* Estilos para el menú de navegación */
+nav ul {
+  list-style: none;
+  padding: 0px;
+  margin-left: 10px;
+}
+
+nav ul li {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+/** Agrego un elemento ★ al html según el estado del <li> **/
+/** ... a quien | cuando            | donde              => que 
+      selector  | :pseudoselectores | ::pseudoelementos   { content:'' } **/
+nav ul li::before {
+  content: "\2605";
+  color: var(--primary-color);
+  display: inline-block;
+  padding-right: 5px;
+  font-size: 30px;
+  visibility: hidden;
+}
+
+nav ul li:hover::before {
+  visibility: visible;
+}
+
+/* Estilos para los enlaces */
+a {
+  margin: 10px;
+  font-size: 30px;
+  text-decoration: none;
+  cursor: url('../img/cursor-pointer.png'), pointer;
+}
+
+a:link {
+  /* Enlaces no visitados y que tengan href */
+  color: var(--primary-color);
+}
+
+a:visited {
+  /*exclusivo para enlaces*/
+  color: var(--secondary-color);
+}
+
+a:active {
+  /*se activa cuando el usuario pulsa el elemento*/
+  color: pink;
+}
+
+a:hover {
+  /* El mouse pasa por encima del elemento */
+  text-decoration: underline;
+}
+
+/* Estilos para los tooltips */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted var(--primary-color);
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: var(--primary-color);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+/* aca escondemos el texto */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+/* Lista con viñeta centrada */
+/* .centrar-listas {
+  text-align: center;
+}
+.centrar-listas ul {
+  text-align: left;
+  display: inline-block;
+} */
+/* Lista rayada */
+ul.lista {
+  list-style: none;
+  padding: 0;
+  margin: 20px auto;
+  width: 80%;
+}
+
+ul.lista li {
+  margin: 0;
+  padding: 8px 10px;
+  color: #111;
+}
+
+ul.lista li:nth-child(odd) {
+  /*filas impares*/
+  background-color: #e5e5e5;
+}
+
+ul.lista li:nth-child(even) {
+  /*filas pares*/
+  background-color: #887e7e;
+  color: #e5e5e5;
+}
+
+/* Estilos para los párrafos */
+p:nth-child(2n+1) {
+  font-size: 1.5;
+  color: var(--primary-color);
+}
+
+p:nth-child(2n) {
+  color: var(--secondary-color);
+}
+
+p:nth-child(even)::after {
+  content: ' - Continuara...';
+  color: var(--primary-color);
+}
+
+p::first-letter {
+  color: darkred;
+}
+
+p::first-line {
+  color: pink;
+}
+
+/* Estilos para los formularios */
+form input {
+  margin: 0 15px 0 10px;
+}
+
+input[type="submit"],
+input[type="reset"] {
+  background-color: var(--primary-color);
+  border: none;
+  color: #fff;
+  width: unset;
+}
+
+input:disabled {
+  background-color: #222;
+  border: 1px solid var(--secondary-color);
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+input[type="text"][name="nombre"]:invalid,
+input[type="email"]:invalid {
+  border: 2px solid var(--primary-color);
+}
+
+input[type="text"]:valid,
+input[type="email"]:valid {
+  border: 2px solid green;
+}
+
+.required::before {
+  content: '*';
+  color: var(--primary-color);
+  margin-left: 5px;
+  font-size: 20px;
+}
+
+/* Dialogo-perrito */
+/* --------------- */
+.dialogo {
+  background: var(--secondary-color);
+  padding: 10px;
+  color: #000;
+  margin: 30px auto;
+  border-radius: 15px;
+  font-size: 18px;
+  line-height: 28px;
+  text-align: center;
+  width: 200px;
+  /*Agrego position relative porque voy a añadir el 
+    triangulito para la viñeta y el perrito con position absolute */
+  position: relative;
+}
+
+/** ... añadir el triagulito para formar la viñeta **/
+.dialogo::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -40px;
+  border-top: 20px solid var(--secondary-color);
+  border-right: 20px solid transparent;
+  border-left: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  right: calc(50% - 20px);
+}
+
+/** ... añadir el perrito **/
+.dialogo::after {
+  content: url("../img/perro.gif");
+  display: block;
+  position: absolute;
+  bottom: -150px;
+}
